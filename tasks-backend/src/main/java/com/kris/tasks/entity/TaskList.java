@@ -1,14 +1,19 @@
 package com.kris.tasks.entity;
 
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "task_lists")
+@Data
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskList {
 
     @Id
@@ -26,4 +31,7 @@ public class TaskList {
 
     @Column(nullable = false)
     private Local updated;
+
+    @OneToMany(mappedBy = "taskList", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<Task> tasks;
 }
