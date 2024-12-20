@@ -26,12 +26,12 @@ public class TaskList {
 
     private String description;
 
+    @OneToMany(mappedBy = "taskList", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<Task> tasks;
+
     @Column(nullable = false)
     private LocalDate created;
 
     @Column(nullable = false)
     private Local updated;
-
-    @OneToMany(mappedBy = "taskList", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<Task> tasks;
 }
